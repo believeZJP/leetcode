@@ -265,17 +265,17 @@ Note: 时间空间二选一
 
 [Leetcode 27](https://leetcode-cn.com/problems/remove-element/)
 
-## 链表
+--------
 
---
+## 链表
 
 * 非连续空间，包含当前数据和下一节点的地址
 
 ### 复杂度
 
-* 访问access O（N）
+* 访问 O（N）
 * 搜索 O（N）
-* 插入 O(1)
+* 插入 O（1）
 * 删除 O（1）
 
 ### 场景
@@ -283,6 +283,14 @@ Note: 时间空间二选一
 读少写多
 
 ### 常用操作
+
+1. 创建链表
+
+2. 添加元素
+3. 访问元素
+4. 查找元素
+5. 删除元素
+6. 链表的长度
 
 * 创建链表
 
@@ -344,7 +352,6 @@ Note: 时间空间二选一
     O(N)
 
 ```python
-
     linkedlist[2] = 88
 ```
 
@@ -352,16 +359,17 @@ Note: 时间空间二选一
     O(1)
 
 ```python
-
     length = len(linkedlist)
 ```
 
 ### 练习题
 
 [203](https://leetcode-cn.com/problems/remove-linked-list-elements/)
+[206](https://leetcode-cn.com/problems/reverse-linked-list/)
 
-队列
---
+--------
+
+## 队列
 
 * 先进先出
 * 基于链表创建的
