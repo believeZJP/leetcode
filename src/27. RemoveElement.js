@@ -5,8 +5,6 @@
 
 元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
 
- 
-
 说明:
 
 为什么返回数值是整数，但输出的答案是数组呢?
@@ -21,9 +19,8 @@ int len = removeElement(nums, val);
 // 在函数里修改输入数组对于调用者是可见的。
 // 根据你的函数返回的长度, 它会打印出数组中 该长度范围内 的所有元素。
 for (int i = 0; i < len; i++) {
-    print(nums[i]);
+    print(nums[i]);
 }
- 
 
 示例 1：
 
@@ -35,7 +32,6 @@ for (int i = 0; i < len; i++) {
 输入：nums = [0,1,2,2,3,0,4,2], val = 2
 输出：5, nums = [0,1,4,0,3]
 解释：函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。注意这五个元素可为任意顺序。你不需要考虑数组中超出新长度后面的元素。
- 
 
 提示：
 
@@ -50,31 +46,32 @@ for (int i = 0; i < len; i++) {
  * @param {number} val
  * @return {number}
  */
-var removeElement = function (nums, val) {
-  // 双指针解法，定义左指针为0，右指针为数组长度－1
-  let left = 0;
-  let right = nums.length - 1;
-  // 两个指针依次向中间靠拢，直到两个指针相遇或交换位置，则跳出循环，即left < right时一直循环
-  // 左指针指向val的值，右指针指向不为val值时，左右指针交换，将左指针指向的val值和右指针的值交换，这样val被换到右侧。
-  while (left < right) {
-    while (left < right && nums[left] !== val) {
-      left++;
+const removeElement = function (nums, val) {
+    // 双指针解法，定义左指针为0，右指针为 数组长度－1
+    let left = 0
+    let right = nums.length - 1
+    // 两个指针依次向中间靠拢，直到两个指针相遇或交换位置，则跳出循环，即left < right时一直循环
+    // 左指针指向val的值，右指针指向不为val值时，左右指针交换，将左指针指向的val值和右指针的值交换，这样val被换到右侧。
+    while (left < right) {
+        while (left < right && nums[left] !== val) {
+            left++
+        }
+        while (left < right && nums[right === val]) {
+            right--
+        }
+        // const t = nums[left]
+        // nums[left] = nums[right]
+        // nums[right] = t
+        [nums[left], nums[right]] = [nums[right], nums[left]]
     }
-    while (left < right && nums[right === val]) {
-      right--;
-    }
-    const t = nums[left];
-    nums[left] = nums[right];
-    nums[right] = t;
-  }
-  //  循环结束后，两种情况，
-  //   left===right,且nums[left]===val,则，数组长度为left+1
-  //   left > right, 数组长度left;
-  return nums[left] === val ? left : left + 1;
+    //  循环结束后，两种情况，
+    //   left===right,且nums[left]===val,则，数组长度为left+1
+    //   left > right, 数组长度left;
+    return nums[left] === val ? left : left + 1
 
-  //   if (left === right && nums[left] === val) {
-  //     return left;
-  //   } else {
-  //     return left + 1;
-  //   }
-};
+    //   if (left === right && nums[left] === val) {
+    //     return left;
+    //   } else {
+    //     return left + 1;
+    //   }
+}

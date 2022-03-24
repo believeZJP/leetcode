@@ -375,7 +375,6 @@ Note: 时间空间二选一
 * 基于链表创建的
 
 > 单端队列： 一个口进一个口出
-
 > 双端队列： 两个口都可以进，两个口都可以出
 
 ### 复杂度
@@ -387,66 +386,96 @@ Note: 时间空间二选一
 
 ### 常用操作
 
+1. 创建队列
+2. 添加元素
+3. 获取即将出队的元素
+4. 删除即将出队的元素
+5. 判断队列是否为空
+6. 队列长度
+7. 遍历队列
+
 * 创建队列
 
+```js
+function Queue() {
+  let items = []
+  this.enqueue = function(e) {
+    items.push(e)
+  }
+  this.dequeue = function() {
+    return items.shift()
+  }
+  this.isEmpty = function() {
+    return items.length === 0
+  }
+  this.front = function() {
+    return items[0]
+  }
+  this.clear = function() { 
+    items = [] 
+  }
+  this.size = function() {
+    return items.length
+  }
+}
+
+function Deque() {
+  let items = []
+  this.addFirst = function(e) {
+    items.unshift(e)
+  }
+  this.removeFirst = function() {
+    return items.shift()
+  }
+  this.addLast = function(e) {
+    items.push(e)
+  }
+  this.removeLast = function() {
+    return items.pop()
+  }
+  this.isEmpty = function() {
+    return items.length === 0
+  }
+  this.front = function() {
+    return items[0]
+  }
+  this.clear = function() { 
+    items = [] 
+  }
+  this.size = function() {
+    return items.length
+  }
+}
+```
+
+```python
 # 创建队列
-
 # 该方法为双端队列
-
-    queue = deque()
-
-* 添加元素
-
+queue = deque()
 # 向末尾添加
-
-    queue.append(1)
-
+queue.append(1)
 # 向队列头添加
-
-    queue.appendleft(1)
-
-* 获取即将出队的元素
-
+queue.appendleft(1)
 # 获取即将出队的元素 O(1)
-
     temp1 = queue[0]
-
 # 获取队尾元素 O(1)
-
     temp2 = queue[-1]
     temp2 = queue[len(queue)-1]
-
-* 删除即将出队的元素
-
 # 删除即将出队的元素 O(1)
-
 # 会返回元素
-
-    temp2 = queue.popleft()
-
+temp2 = queue.popleft()
 # 删除最右元素
-
-    queue.pop()
-
-* 判断队列是否为空
+queue.pop()
 
 # deque每次添加删除元素时会自动计数 O(1)
-
-    len(queue) == 0
-
-* 队列长度
-
+len(queue) == 0
 # deque每次添加删除元素时会自动计数 O(1)
-
-    len(queue)
-
-* 遍历队列
-
+len(queue)
 # 变删除边遍历
-
     while len(queue) !=0:
      temp = queue.popleft()
      print(temp)
+```
 
 ### 练习题
 
@@ -455,6 +484,8 @@ Note: 时间空间二选一
 
 > 思路：  
 > 将滑动窗可以看成一个双端队列。双端队列的最大值放在头部，当头部与滑动窗口出窗的元素相同时，则弹出队头。滑动窗要新进入的元素与队列的尾部元素进行比较，如果比尾部元素大，这弹出尾部元素，因为尾部元素肯定不可能为最大元素。直到尾部元素比要进队元素大或者队列为空时，将进队元素压入队尾。
+
+```python
 
     class Solution:
         def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
@@ -478,15 +509,16 @@ Note: 时间空间二选一
                 res.append(queue[0])
     
             return res
+```
 
-Stack
------
+--------
+
+## Stack
 
 * 先进后出
 * 基于链表创建的
 
 > 单端队列： 一个口进一个口出
-
 > 双端队列： 两个口都可以进，两个口都可以出
 
 ### 复杂度
@@ -496,60 +528,55 @@ Stack
 * 插入: O(1)
 * 删除： O(1)
 
+查找：从栈头开始查找，时间复杂度为 O(n)
+
+插入或删除：进栈与出栈的时间复杂度为 O(1)
+
 ### 常用操作
 
-* 创建stack
+1. 创建栈
+2. 添加元素
+3. 查看栈顶元素-即将出栈的元素
+4. 删除栈顶元素-即将出栈的元素
+5. 栈的长度
+6. 栈是否为空
+7. 遍历栈(边删除栈顶元素，边遍历)
 
-# 创建stack
-
-    stack = []
-
-* 添加元素
-
-# 向末尾添加
-
-    stack.append(1)
-
-* 获取即将出stack的元素
-
-# 获取即将stack的元素 O(1)
-
-    temp1 = stack[-1]
-
-* 删除即将stack的元素
-
-# 删除即将出stack的元素 O(1)
-
-# 会返回元素
-
-    temp = stack.pop()
-
-* 判断队列是否为空
-
-# stack每次添加删除元素时会自动计数 O(1)
-
-    len(stack) == 0
-
-* stack长度
-
-# stack每次添加删除元素时会自动计数 O(1)
-
-    len(stack)
-
-* 遍历stack
-
-# 变删除边遍历
-
-    while len(stack) !=0:
-     temp = queue.pop()
-     print(temp)
+```js
+function Stack() {
+    let items = []
+    // 入栈
+    this.push = function(e) {
+        items.push(e)
+    }
+    // 出栈
+    this.pop = function() {
+        return items.pop()
+    }
+    // 是否为空
+    this.isEmpty = function() {
+        return items.length === 0
+    }
+    // 栈大小
+    this.size = function() {
+        return items.length
+    }
+    // 清空栈
+    this.clear = function() {
+        items = []
+    }
+ 
+}
+```
 
 ### 练习题
 
-[Leetcode 239](https://leetcode-cn.com/problems/sliding-window-maximum/)
+[Leetcode 20](https://leetcode-cn.com/problems/valid-parentheses/)
+[Leetcode 496](https://leetcode-cn.com/problems/next-greater-element-i/)
 
-Hash
-----
+--------
+
+## Hash
 
 * Key - Hash Function - Address
 * Key - Value
